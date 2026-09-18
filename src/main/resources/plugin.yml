@@ -1,0 +1,21 @@
+name: hideandseek
+prefix: EscondeEsconde
+version: '${version}'
+
+main: me.oredev.hideandseek.Hideandseek
+api-version: '1.21.4'
+load: POSTWORLD
+
+authors: [ orezin ]
+commands:
+  hideandseek:
+    description: Comando principal do Esconde-Esconde
+    usage: /<command> <join|leave|list|admin>
+    aliases: [hs, has]
+permissions:
+  hideandseek.join:
+    description: Permite entrar em arenas de Esconde-Esconde
+    default: true
+  hideandseek.admin:
+    description: Permite administrar arenas de Esconde-Esconde
+    default: op

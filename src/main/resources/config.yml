@@ -1,0 +1,593 @@
+# =========================================================
+# GAME
+# Configurações principais da partida
+# =========================================================
+
+game:
+
+  # Tempo em segundos
+  countdown: 30
+  hiding-time: 60
+  game-time: 600
+  ending-time: 20
+
+  summary:
+    top-amount: 3
+
+  # Fogos comemorativos durante ENDING. Usam apenas o X/Z definido nos bounds da arena.
+  ending-fireworks:
+    enabled: true
+    interval-ticks: 12
+    amount: 2
+    launch-velocity: 1.0
+    power: 1
+    trail: true
+    flicker: true
+    colors:
+      - '#FFD700'
+      - '#FF5555'
+      - '#55FFFF'
+
+# =========================================================
+# LOBBY
+# Local para onde os jogadores retornam
+# Defina usando /hs admin setlobby
+# =========================================================
+
+lobby:
+  world: world
+  x: -181.82617377359733
+  y: 105.0625
+  z: 386.573102296842
+  yaw: -156.47035
+  pitch: -0.56533873
+
+# =========================================================
+# SEEKERS
+# Escalonamento da quantidade de procuradores
+# =========================================================
+
+seekers:
+
+  # Formato:
+  # quantidade-de-jogadores: quantidade-de-procuradores
+  scaling:
+    '2': 1
+    '7': 2
+    '13': 3
+
+# =========================================================
+# LOADOUTS
+# Equipamentos entregues para cada equipe
+# =========================================================
+
+loadouts:
+
+  # -------------------------------------------------------
+  # Procurador
+  # -------------------------------------------------------
+
+  seeker:
+
+    weapon:
+      material: IRON_SWORD
+      enchantments:
+        sharpness: 1
+        fire_aspect: 1
+
+    chestplate:
+      material: LEATHER_CHESTPLATE
+      color: '#FF0000'
+
+    boots:
+      material: LEATHER_BOOTS
+      color: '#FF0000'
+      enchantments:
+        feather_falling: 4
+
+  # -------------------------------------------------------
+  # Escondido
+  # -------------------------------------------------------
+
+  hider:
+
+    weapon:
+      material: STICK
+      enchantments:
+        knockback: 1
+
+    chestplate:
+      material: LEATHER_CHESTPLATE
+      color: '#0000FF'
+
+    boots:
+      material: LEATHER_BOOTS
+      color: '#0000FF'
+      enchantments:
+        feather_falling: 2
+
+# -------------------------------------------------------
+# Fogos de artifício
+# -------------------------------------------------------
+
+fireworks:
+  seeker:
+    material: FIREWORK_ROCKET
+    name: <red><bold>Fogo de artifício</bold></red>
+    lore:
+      - <gray>Uso infinito.
+    slot: 8
+    color: '#FF0000'
+    power: 1
+  hider:
+    material: FIREWORK_ROCKET
+    name: <blue><bold>Fogo de artifício</bold></blue>
+    lore:
+      - <gray>Uso infinito.
+    slot: 8
+    color: '#0000FF'
+    power: 1
+
+# =========================================================
+# COINS
+# Sistema de moedas coletáveis durante a partida
+# =========================================================
+
+coins:
+
+  enabled: true
+
+  # Spawn
+  spawn-interval: 6
+  max-active: 30
+
+  # -------------------------------------------------------
+  # Item da coin
+  # -------------------------------------------------------
+
+  item:
+    material: GOLD_INGOT
+    name: <gold><bold>Coin</bold></gold>
+    lore:
+      - <gray>Colete durante a partida.
+
+  # -------------------------------------------------------
+  # Ferramenta para selecionar a área de spawn
+  # -------------------------------------------------------
+
+  bounds-wand:
+    material: WOODEN_AXE
+    name: <gold><bold>Selecionador de coins</bold></gold>
+    lore:
+      - '<gray>Botão esquerdo: primeira posição'
+      - '<gray>Botão direito: segunda posição'
+
+# =========================================================
+# EVENTS
+# Eventos aleatórios por partida, executados durante SEEKING
+# =========================================================
+
+events:
+  enabled: true
+  start-delay: 100
+  default-warning-time: 10
+  interval:
+    min: 150
+    max: 200
+  warning-sound: BLOCK_NOTE_BLOCK_PLING
+  started-sound: ENTITY_EXPERIENCE_ORB_PICKUP
+  finished-sound: BLOCK_NOTE_BLOCK_BASS
+
+  speed:
+    enabled: true
+    weight: 10
+    warning-time: 10
+    duration: 30
+    amplifier: 9
+
+  tornado:
+    enabled: true
+    weight: 5
+    warning-time: 10
+    duration: 60
+    spawn-attempts: 10
+    spawn-y: 83.0
+    minimum-spawn-distance: 10.0
+
+    size:
+      height: 46.0
+      layers: 22
+      base-radius: 4.5
+      top-radius: 18.0
+
+    movement:
+      speed: 0.38
+      destination-threshold: 1.5
+
+    physics:
+      capture-duration-ticks: 40
+      orbit-radius: 3.0
+      orbit-speed: 2.8
+      orbit-lift: 0.2
+      influence-radius: 24.0
+      core-radius: 5.5
+      pull-strength: 0.88
+      pull-max: 0.75
+      spin-strength: 0.58
+      spin-max: 0.55
+      lift-strength: 0.72
+      lift-max: 0.45
+      max-player-height: 40.0
+      launch-strength: 100.6
+      launch-height: 3.0
+      max-velocity: 5.4
+      launch-cooldown-ticks: 240
+      fall-protection-ticks: 60
+
+    visuals:
+      particles-per-layer: 8
+      render-interval-ticks: 4
+      rotation-speed: 0.06
+      debris:
+        enabled: true
+        amount: 16
+        materials:
+          - OAK_LEAVES
+          - OAK_LOG
+          - DIRT
+          - COBBLESTONE
+          - STONE
+      sound:
+        enabled: true
+        interval-ticks: 30
+        ambient: ENTITY_PHANTOM_FLAP
+
+  swap:
+    enabled: true
+    weight: 10
+    warning-time: 10
+    # O evento se encerra assim que a contagem e a troca forem concluídas.
+    duration: 10
+    minimum-hiders: 2
+    reset-velocity: true
+    visuals:
+      particles: true
+      particle: PORTAL
+      particle-count: 30
+    sound:
+      enabled: true
+      countdown: BLOCK_NOTE_BLOCK_PLING
+      swap: ENTITY_ENDERMAN_TELEPORT
+
+  floor-is-lava:
+    enabled: true
+    weight: 6
+    warning-time: 15
+    duration: 20
+    # Valor global. Para sobrescrever apenas uma arena, use events.floor-is-lava.lava-y no YAML dela.
+    lava-y: 83.0
+    damage:
+      amount: 2.0
+      interval-ticks: 20
+      fire-ticks: 40
+    physics:
+      danger-margin: 0.25
+      knock-up: 0.30
+    visuals:
+      enabled: true
+      tile-size: 16
+      particle-interval-ticks: 5
+      particles-per-update: 8
+    sound:
+      enabled: true
+      countdown: BLOCK_NOTE_BLOCK_PLING
+      ambient: BLOCK_LAVA_AMBIENT
+      pop: BLOCK_LAVA_POP
+
+debug:
+  events: false
+
+# =========================================================
+# UTILITIES
+# Loja e utilitários compráveis com coins
+# =========================================================
+
+utilities:
+
+  # -------------------------------------------------------
+  # Loja dos escondidos
+  # -------------------------------------------------------
+
+  hider:
+    menu:
+      filler:
+        material: none
+        name: ' '
+        lore: []
+      close:
+        slot: 22
+        material: none
+        name: <red>Fechar
+        lore:
+          - <gray>Fechar a loja.
+      rows: 3
+      title: <gold><bold>LOJA DOS ESCONDIDOS</bold></gold>
+
+    opener:
+      slot: 4
+      material: CHEST
+      name: <gold><bold>Loja de utilitários</bold></gold>
+      lore:
+        - <gray>Clique para abrir a loja.
+
+    speed:
+      hotbar-slot: 1
+      slot: 10
+      material: SUGAR
+      name: <aqua><bold>Velocidade II</bold></aqua>
+      lore:
+        - <gray>Receba Velocidade II por {seconds} segundos.
+        - ''
+        - '<gold>Preço: <yellow>{price} coins'
+        - <yellow>Clique para comprar!
+      price: 3
+      duration-seconds: 10
+      amplifier: 1
+
+    kangaroo:
+      slot: 11
+      hotbar-slot: 2
+      material: FIREWORK_ROCKET
+      name: <gold><bold>Kangaroo</bold></gold>
+      lore:
+        - <gray>Use com Shift para avançar.
+        - <gray>Use sem Shift para pular para cima.
+        - ''
+        - '<gold>Preço: <yellow>{price} coins'
+        - <yellow>Clique para comprar!
+      price: 5
+      vertical-velocity: 1.25
+      forward-velocity: 1.7
+      forward-y-velocity: 0.55
+      sound: ENTITY_FIREWORK_ROCKET_LAUNCH
+
+  # -------------------------------------------------------
+  # Loja dos procuradores
+  # -------------------------------------------------------
+
+  seeker:
+    menu:
+      rows: 3
+      title: <red><bold>LOJA DOS PROCURADORES</bold></red>
+      filler:
+        material: none
+        name: ' '
+        lore: []
+      close:
+        slot: 22
+        material: none
+        name: <red>Fechar
+        lore:
+          - <gray>Fechar a loja.
+
+    opener:
+      slot: 4
+      material: CHEST
+      name: <red><bold>Loja de utilitários</bold></red>
+      lore:
+        - <gray>Clique para abrir a loja.
+
+    fishing-rod:
+      slot: 10
+      hotbar-slot: 1
+      material: FISHING_ROD
+      name: <red><bold>Gancho de captura</bold></red>
+      lore:
+        - <gray>Acerte um escondido e recolha o anzol
+        - <gray>para puxá-lo até você.
+        - ''
+        - '<gold>Preço: <yellow>{price} coins'
+        - <yellow>Clique para comprar!
+      price: 3
+      pull-strength: 1.25
+      unbreakable: true
+
+    bell:
+      slot: 11
+      hotbar-slot: 2
+      material: BELL
+      name: <gold><bold>Sino da revelação</bold></gold>
+      lore:
+        - <gray>Revele todos os escondidos por
+        - <gray>{seconds} segundos.
+        - ''
+        - '<gold>Preço: <yellow>{price} coins'
+        - <yellow>Clique para comprar!
+      price: 5
+      duration-seconds: 2
+      sound: BLOCK_BELL_USE
+
+    kangaroo:
+      slot: 12
+      hotbar-slot: 3
+      material: FIREWORK_ROCKET
+      name: <gold><bold>Kangaroo</bold></gold>
+      lore:
+        - <gray>Use com Shift para avançar.
+        - <gray>Use sem Shift para pular para cima.
+        - ''
+        - '<gold>Preço: <yellow>{price} coins'
+        - <yellow>Clique para comprar!
+      price: 5
+      vertical-velocity: 1.25
+      forward-velocity: 1.7
+      forward-y-velocity: 0.55
+      sound: ENTITY_FIREWORK_ROCKET_LAUNCH
+
+# =========================================================
+# MENUS
+# Menus de seleção de partidas e mapas
+# =========================================================
+
+menus:
+
+  # -------------------------------------------------------
+  # Menu principal
+  # -------------------------------------------------------
+
+  main:
+    rows: 3
+    title: <dark_gray>Jogar Esconde-Esconde</dark_gray>
+
+    random:
+      slot: 11
+      material: FIREWORK_ROCKET
+      name: <green>Partida aleatória</green>
+      lore:
+        - <gray>Entre rapidamente em uma arena
+        - <gray>disponível de Esconde-Esconde.
+        - ''
+        - <yellow>Clique para jogar!
+
+    maps:
+      slot: 15
+      material: OAK_SIGN
+      name: <aqua>Selecionar Mapa</aqua>
+      lore:
+        - <gray>Escolha a arena em que deseja jogar.
+        - ''
+        - <yellow>Clique para ver os mapas!
+
+  # -------------------------------------------------------
+  # Menu de mapas
+  # -------------------------------------------------------
+
+  maps:
+    rows: 6
+    title: <dark_gray>Selecionar Mapa</dark_gray>
+
+    # Item usado para preencher slots vazios
+    filler:
+      material: none
+      name: ' '
+      lore: []
+
+    # -----------------------------------------------------
+    # Arenas
+    # -----------------------------------------------------
+
+    arena:
+      material: FILLED_MAP
+
+      slots:
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+        - 29
+        - 30
+        - 31
+        - 32
+        - 33
+        - 34
+
+      name: <green>{arena}</green>
+      lore:
+        - '<gray>Jogadores: <white>{players}/{max_players}'
+        - '<gray>Mínimo: <white>{min_players}'
+        - ''
+        - <yellow>Clique para entrar!
+
+    # -----------------------------------------------------
+    # Navegação
+    # -----------------------------------------------------
+
+    previous:
+      slot: 18
+      material: ARROW
+      name: <yellow>Página anterior
+      lore:
+        - <gray>Ver os mapas anteriores.
+
+    back:
+      slot: 49
+      material: ARROW
+      name: <yellow>Voltar
+      lore:
+        - <gray>Voltar ao menu principal.
+
+    next:
+      slot: 26
+      material: ARROW
+      name: <yellow>Próxima página
+      lore:
+        - <gray>Ver mais mapas disponíveis.
+
+    # -----------------------------------------------------
+    # Nenhuma arena disponível
+    # -----------------------------------------------------
+
+    empty:
+      slot: 22
+      material: WEB
+      name: <red>Nenhuma arena disponível
+      lore:
+        - <gray>Configure uma arena antes de jogar.
+
+  # -------------------------------------------------------
+  # Mensagens dos menus
+  # -------------------------------------------------------
+
+  messages:
+    no-available-arena: <red>Não há arenas disponíveis no momento.
+
+# =========================================================
+# NEXT GAME
+# Item entregue ao final da partida
+# =========================================================
+
+next-game-menu-item:
+  slot: 4
+  material: PAPER
+  name: <green><bold>Jogar novamente</bold></green>
+  lore:
+    - <gray>Clique para abrir o menu de partidas.
+
+# =========================================================
+# INITIAL MENU
+# Item entregue ao entrar no servidor e ao retornar do ENDING
+# =========================================================
+
+initial-menu-item:
+  slot: 4
+  material: COMPASS
+  name: <green><bold>Jogar</bold></green>
+  lore:
+    - <gray>Clique para abrir o menu de partidas.
+
+# =========================================================
+# UI
+# Elementos visuais
+# =========================================================
+
+ui:
+  scoreboard: true
+
+# =========================================================
+# SOUNDS
+# Sons do plugin
+# =========================================================
+
+sounds:
+  enabled: true

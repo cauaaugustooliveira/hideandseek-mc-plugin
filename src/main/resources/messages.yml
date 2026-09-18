@@ -1,0 +1,388 @@
+# =========================================================
+# GLOBAL
+# =========================================================
+
+prefix: <gold><bold>ESCONDE-ESCONDE</bold></gold> <dark_gray>»</dark_gray>
+
+
+# =========================================================
+# GAME
+# Mensagens principais da partida
+# =========================================================
+
+game:
+
+  # Entrada / saída
+  joined: <green>Você entrou na arena <yellow>{arena}</yellow>.
+  player-joined: <yellow>{player}</yellow> <gray>entrou na partida. <dark_gray>({players}/{max-players})
+  left: <red>Você saiu da partida.
+
+  # Contagem regressiva
+  countdown: <yellow>A partida começará em <gold>{seconds}</gold> segundos.
+  countdown-cancelled: '<red>A contagem foi cancelada: jogadores insuficientes.'
+
+  # Papéis
+  hider: <green>Você é um <bold>ESCONDIDO</bold>! Você tem <yellow>{seconds}</yellow>s
+    para se esconder.
+  seeker: <red>Você é o <bold>PROCURADOR</bold>! Aguarde os jogadores se esconderem.
+  seeker-released: <red><bold>OS PROCURADORES FORAM LIBERADOS!</bold></red>
+
+  # Jogador encontrado / respawn
+  found: <yellow>{player}</yellow> <red>foi encontrado!
+  found-self: <red>Você foi encontrado e agora está assistindo à partida.
+
+  seeker-respawned: <green>Você voltou à partida como procurador.
+  hider-respawned: <red>Você voltou à partida como procurador.
+
+  # Vitória
+  seekers-win: <red><bold>PROCURADORES VENCERAM!</bold></red>
+  hiders-win: <green><bold>ESCONDIDOS VENCERAM!</bold></green>
+
+  # Outros
+  unknown-player: Um jogador
+  coin-collected: <gold>+1 coin <gray>({coins} no total)
+
+  summary:
+    header: <dark_gray><strikethrough>----------------</strikethrough> <gold><bold>SUMÁRIO DA PARTIDA</bold></gold> <dark_gray><strikethrough>----------------</strikethrough>
+    seekers-title: <red><bold>Top Procuradores</bold>
+    seeker-entry: <gray>{position}. <white>{player}</white> <dark_gray>— <red>{founds}</red> eliminações
+    hiders-title: <green><bold>Top Escondidos</bold>
+    hider-entry: <gray>{position}. <white>{player}</white> <dark_gray>— <green>{time}</green>
+    none: <gray>Nenhuma estatística disponível.
+    time: '{minutes}m {seconds}s'
+
+  # -------------------------------------------------------
+  # Titles
+  # -------------------------------------------------------
+
+  titles:
+
+    countdown:
+      title: <gold>{seconds}
+      subtitle: ''
+
+    hiding:
+      title: <green>Escondam-se!
+      subtitle: <gray>Os procuradores estão congelados.
+
+    seeking:
+      title: <red><bold>PROCURADORES LIBERADOS!
+      subtitle: <gray>Encontrem todos os escondidos.
+
+    found:
+      title: <red><bold>VOCÊ FOI ENCONTRADO!
+      subtitle: <gray>Agora você é espectador.
+
+    seeker-respawn:
+      title: <red><bold>VOCÊ MORREU!
+      subtitle: <gray>Você reaparece em <yellow>{seconds}</yellow> segundos.
+
+    hider-respawn:
+      title: <red><bold>VOCÊ FOI ENCONTRADO!
+      subtitle: <gray>Você volta como procurador em <yellow>{seconds}</yellow> segundos.
+
+    seekers-win:
+      title: <red><bold>PROCURADORES VENCERAM!
+      subtitle: <gray>A arena será resetada em breve.
+
+    hiders-win:
+      title: <green><bold>ESCONDIDOS VENCERAM!
+      subtitle: <gray>A arena será resetada em breve.
+
+
+# =========================================================
+# ERRORS
+# Mensagens de erro gerais
+# =========================================================
+
+error:
+  no-arena: <red>Arena não encontrada.
+  player-not-found: <red>Jogador não encontrado ou offline.
+  already-playing: <red>Você já está em uma partida.
+  arena-full: <red>Esta arena está lotada.
+  not-playing: <red>Você não está em uma partida.
+
+  player-only: <red>Apenas jogadores podem usar este comando.
+  no-permission: <red>Você não tem permissão para isso.
+
+
+# =========================================================
+# COMMANDS
+# Mensagens relacionadas aos comandos
+# =========================================================
+
+commands:
+
+  # Comandos normais
+  usage: <yellow>/hs join [arena], /hs leave, /hs list
+  select-arena: '<yellow>Informe uma arena: /hs list'
+
+  list: '<yellow>Arenas: <white>{arenas}'
+  no-arenas: nenhuma
+
+  cannot-join: <red>Não foi possível entrar. A arena pode estar cheia, mal configurada
+    ou em andamento.
+  invalid-usage: <red>Uso inválido.
+
+  # -------------------------------------------------------
+  # Administração
+  # -------------------------------------------------------
+
+  admin-help:
+    - <gold><bold>ADMINISTRAÇÃO — ESCONDE-ESCONDE</bold></gold>
+    - <yellow>/hs admin help <gray>— Mostra esta lista de comandos.
+    - <yellow>/hs admin reload <gray>— Recarrega config.yml e messages.yml.
+    - <yellow>/hs admin create <arena> <gray>— Cria uma arena na sua localização.
+    - <yellow>/hs admin delete <arena> <gray>— Exclui a arena e seu arquivo.
+    - <yellow>/hs admin setlobby <gray>— Define o lobby global para retorno dos jogadores.
+    - <yellow>/hs admin setjoinlocation <arena> <gray>— Define onde jogadores entram
+      e aguardam a partida.
+    - <yellow>/hs admin sethiderspawn <arena> <gray>— Define o spawn dos escondidos.
+    - <yellow>/hs admin setseekerwaitspawn <arena> <gray>— Define onde procuradores
+      aguardam congelados.
+    - <yellow>/hs admin setseekerspawn <arena> <gray>— Define onde procuradores começam
+      a procurar.
+    - <yellow>/hs admin setbounds <arena> <gray>— Entrega o machado para definir a área
+      das coins.
+    - <yellow>/hs admin event <arena> <evento|stop> <gray>— Inicia ou para um evento
+      da partida.
+    - <yellow>/hs admin coins <set|give|remove> <jogador> <quantia> <gray>— Altera coins durante a partida.
+    - <yellow>/hs admin sethider <jogador> <gray>— Define o jogador como escondido.
+    - <yellow>/hs admin setseeker <jogador> <gray>— Define o jogador como procurador.
+    - <yellow>/hs admin save <arena> <gray>— Salva a configuração da arena.
+    - <yellow>/hs admin forcestart <arena> <gray>— Inicia a partida em andamento.
+    - <yellow>/hs admin stop <arena> <gray>— Para a partida e restaura os jogadores.
+
+  # Respostas administrativas
+  arena-exists: <red>Essa arena já existe.
+  arena-created: <green>Arena <yellow>{arena}</yellow> criada.
+  arena-deleted: <green>Arena removida.
+  arena-saved: <green>Arena salva.
+
+  spawn-updated: <green>Spawn atualizado.
+  lobby-updated: <green>Lobby global atualizado.
+
+  force-started: <green>Partida iniciada à força.
+  no-players: <red>Não há jogadores nesta arena.
+  stopped: <green>Partida interrompida.
+
+  reloaded: <green>Configuração e mensagens recarregadas.
+  event-updated: <green>Evento atualizado.
+  event-unavailable: <red>Não foi possível alterar o evento. A partida deve estar
+    em SEEKING.
+  coins-updated: <green>{player} agora possui <yellow>{coins}</yellow> coins.
+  coins-unavailable: <red>O jogador precisa estar em uma partida ativa.
+  role-updated: <green>{player} agora é <yellow>{role}</yellow>.
+  role-unavailable: <red>O jogador precisa estar em uma partida ativa.
+
+roles:
+  hider: Escondido
+  seeker: Procurador
+
+
+# =========================================================
+# COINS
+# Sistema de moedas / seleção de região
+# =========================================================
+
+coins:
+
+  # Seleção da área
+  bounds-selection-started: <yellow>Selecione a primeira posição com o botão esquerdo
+    e a segunda com o botão direito para <gold>{arena}</gold>.
+
+  bounds-first-position: <green>Primeira posição selecionada. Agora selecione a segunda
+    com o botão direito.
+  bounds-first-required: <red>Selecione primeiro a primeira posição com o botão esquerdo.
+
+  bounds-invalid-world: <red>As duas posições devem estar no mundo da arena.
+  bounds-saved: <green>Área de coins salva para <yellow>{arena}</yellow>.
+
+
+# =========================================================
+# UTILITIES
+# Utilitários compráveis durante a partida
+# =========================================================
+
+utilities:
+
+  # Compra
+  speed-purchased: '<green>Velocidade comprada por <yellow>{price}</yellow> coins.
+    Saldo: <gold>{coins}</gold>.'
+  not-enough-coins: '<red>Você precisa de <yellow>{price}</yellow> coins. Saldo: <gold>{coins}</gold>.'
+
+  # Uso
+  speed-used: <aqua>Velocidade II ativada por {seconds} segundos.
+  speed-slot-unavailable: <red>O slot configurado para a Velocidade está ocupado.
+  fishing-rod-purchased: '<green>Vara de pesca comprada por <yellow>{price}</yellow>
+    coins. Saldo: <gold>{coins}</gold>.'
+  fishing-rod-slot-unavailable: <red>O slot configurado para a vara de pesca está
+    ocupado.
+  bell-purchased: '<green>Sino da revelação comprado por <yellow>{price}</yellow>
+    coins. Saldo: <gold>{coins}</gold>.'
+  bell-used: '<gold>Sino tocado: os escondidos brilham por {seconds} segundos.'
+  bell-slot-unavailable: <red>O slot configurado para o sino está ocupado.
+  kangaroo-purchased: '<green>Kangaroo comprado por <yellow>{price}</yellow> coins. Saldo: <gold>{coins}</gold>.'
+  kangaroo-used: <gold>Kangaroo ativado!
+  kangaroo-slot-unavailable: <red>O slot configurado para o Kangaroo está ocupado.
+
+  # Restrições
+  unavailable: <red>Esse utilitário só pode ser usado enquanto você estiver escondido.
+
+events:
+  names:
+    speed: <aqua>Surto de velocidade
+    tornado: <gray><bold>Tornado
+    swap: <light_purple><bold>Troca-Troca
+    floor-is-lava: <red><bold>O chão é lava!
+  warning:
+    chat: <yellow><bold>EVENTO EM BREVE:</bold></yellow> <white>{event}</white> em
+      <gold>{warning}s</gold>.
+    title: <gold><bold>EVENTO ALEATÓRIO</bold></gold>
+    subtitle: <white>{event}</white>
+  started:
+    chat: '<green>Evento iniciado: <white>{event}</white> <gray>({duration}s)'
+    title: <green><bold>EVENTO INICIADO</bold></green>
+    subtitle: <white>{event}</white>
+  finished:
+    chat: <gray>O evento <white>{event}</white> terminou.
+    title: <gray>EVENTO FINALIZADO
+    subtitle: <white>{event}</white>
+  swap:
+    started:
+      chat: <light_purple><bold>TROCA-TROCA!</bold> <white>Os escondidos trocarão
+        de lugar!
+      title: <light_purple><bold>TROCA-TROCA!
+      subtitle: <white>Os escondidos trocarão de lugar!
+    countdown:
+      title: <light_purple><bold>{count}
+      subtitle: <gray>Prepare-se para trocar de esconderijo...
+    swapped:
+      chat: <light_purple><bold>🔀 TROCA!
+      title: <light_purple><bold>🔀 TROCA!
+      subtitle: <white>Todos os escondidos mudaram de posição!
+    cancelled:
+      chat: '<gray>Troca-Troca cancelado: não há escondidos suficientes.'
+      title: ''
+      subtitle: ''
+  floor-is-lava:
+    countdown:
+      title: <red><bold>🔥 {count}
+      subtitle: <gold>SUBA PARA ALGUM LUGAR!
+    started:
+      title: <red><bold>🔥 O CHÃO VIROU LAVA!
+      subtitle: <gold>Não fique no chão!
+
+
+# =========================================================
+# STATES
+# Nomes dos estados internos da arena
+# =========================================================
+
+states:
+  waiting: Aguardando
+  starting: Iniciando
+  hiding: Escondendo
+  seeking: Procurando
+  ending: Encerrando
+  resetting: Resetando
+
+
+# =========================================================
+# SCOREBOARDS
+# Scoreboard exibido em cada estado da partida
+# =========================================================
+
+scoreboards:
+
+  # -------------------------------------------------------
+  # Waiting
+  # -------------------------------------------------------
+
+  waiting:
+    title: <gold><bold>ESCONDE-ESCONDE</bold></gold>
+    lines:
+      - ''
+      - ' <white>Mapa: <aqua>{arena}'
+      - ''
+      - ' <white>Aguardando jogadores...'
+      - ''
+      - ' <white>Jogadores: <aqua>{players}/{max_players}'
+      - ''
+      - <dark_gray>me.oredev.hideandseek
+
+  # -------------------------------------------------------
+  # Starting
+  # -------------------------------------------------------
+
+  starting:
+    title: <yellow><bold>PARTIDA INICIANDO</bold></yellow>
+    lines:
+      - ''
+      - '<white>Mapa: <white>{arena}'
+      - ''
+      - <white>Inicia em <green>{time}s
+      - ''
+      - '<white>Jogadores: <aqua>{players}/{max_players}'
+      - ''
+      - <dark_gray>me.oredev.hideandseek
+
+  # -------------------------------------------------------
+  # Hiding
+  # -------------------------------------------------------
+
+  hiding:
+    title: <green><bold>ESCONDA-SE!</bold></green>
+    lines:
+      - ''
+      - '<white>Mapa: <aqua>{arena}'
+      - ''
+      - '<white>Tempo para esconder:'
+      - <green>{time}s
+      - ''
+      - '<white>Escondidos: <aqua>{hiders}'
+      - '<white>Procuradores: <red>{seekers}'
+      - ''
+      - '<white>Coins: <gold>{coins}'
+      - ''
+      - <dark_gray>me.oredev.hideandseek
+
+  # -------------------------------------------------------
+  # Seeking
+  # -------------------------------------------------------
+
+  seeking:
+    title: <red><bold>PROCURANDO</bold></red>
+    lines:
+      - ''
+      - '<white>Escondidos: <aqua>{hiders}'
+      - '<white>Procuradores: <red>{seekers}'
+      - ''
+      - '<white>Coins: <gold>{coins}'
+      - ''
+      - '<white>Tempo: <green>{time}'
+      - ''
+      - <dark_gray>me.oredev.hideandseek
+
+  # -------------------------------------------------------
+  # Ending
+  # -------------------------------------------------------
+
+  ending:
+    title: <gold><bold>FIM DE JOGO</bold></gold>
+    lines:
+      - '<white>Mapa: <aqua>{arena}'
+      - ''
+      - <white>Voltando ao lobby
+      - <white>em <green>{time}s
+      - ''
+      - <dark_gray>me.oredev.hideandseek
+
+  # -------------------------------------------------------
+  # Resetting
+  # -------------------------------------------------------
+
+  resetting:
+    title: <gray>RESETANDO</gray>
+    lines:
+      - <gray>Preparando próxima partida...
